@@ -381,6 +381,8 @@ bool AP2DataPlot2DModel::hasType(const QString& name)
 
 bool AP2DataPlot2DModel::addType(QString name,int type,int length,QString types,QStringList names)
 {
+    QLOG_DEBUG() << "addType name:" << name << " type:" << type
+                 << " len:" << length << " types:" << types << " names:" << names;
     if (!m_msgNameToInsertQuery.contains(name))
     {
         QString createstring = makeCreateTableString(name,types,names);
