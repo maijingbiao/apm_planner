@@ -519,6 +519,8 @@ bool AP2DataPlot2DModel::endTransaction()
 
 bool AP2DataPlot2DModel::addRow(QString name,QList<QPair<QString,QVariant> >  values,quint64 index)
 {
+    QLOG_DEBUG() << "addRow name:" << name << " values:" << values.at(0).first
+                 << " " << values.at(0).second << " index:" << index;
     //Add a row to a previously defined message type, NAME.Jy   Th
     QSqlQuery query(m_sharedDb);
     if (m_msgNameToInsertQuery.contains(name))
