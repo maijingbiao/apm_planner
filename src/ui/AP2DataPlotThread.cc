@@ -748,11 +748,11 @@ void AP2DataPlotThread::loadTLog()
                     }
 
 //                    quint64 unixtimemsec = (quint64)m_decoder->getUnixTimeFromMs(message.sysid, lastLogTime);
-                    quint64 unixtimemsec = ((lastLogTime+1) - m_logStartTime)*100;
+                    quint64 unixtimemsec = (lastLogTime+1 - m_logStartTime);
 
                     while (lastunixtimemseclist.contains(unixtimemsec))
                     {
-                        unixtimemsec++;
+                        unixtimemsec += 1;
                     }
                     QLOG_DEBUG() << "timestamp index" << unixtimemsec;
                     lastunixtimemseclist.append(unixtimemsec);
@@ -763,7 +763,7 @@ void AP2DataPlotThread::loadTLog()
                     }
                     if (valuepairlist.size() > 1)
                     {
-                        if (!m_dataModel->addRow(name,valuepairlist,unixtimemsec))
+                        if (!m_dataModel->addRow(name,valuepairlist,unixtimemsec+500)) // [TODO] offset index
                         {
                             QString actualerror = m_dataModel->getError();
                             m_dataModel->endTransaction(); //endTransaction can re-set the error if it errors, but we should try it anyway.
